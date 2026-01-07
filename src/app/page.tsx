@@ -18,7 +18,6 @@ async function getVideos() {
 
 export default async function Home() {
   const videos = await getVideos();
-
   // Dummy videos for development
   const dummyVideos = [
     {

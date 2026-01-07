@@ -1,61 +1,94 @@
-import { google } from 'googleapis';
-
-export async function getGoogleSheetsClient() {
-  const auth = new google.auth.GoogleAuth({
-    credentials: {
-      client_email: process.env.GOOGLE_SHEETS_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-    },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-  });
-
-  const client = await auth.getClient();
-  const sheets = google.sheets({ version: 'v4', auth: client as any });
-  
-  return sheets;
-}
+// lib/googleSheets.ts
 
 export async function getVideosFromSheet() {
-  const sheets = await getGoogleSheetsClient();
-  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+  try {
+    const spreadsheetId = '1zGAHV_wZkZXDKWRBUHOTq_keislNMvTq8qwsAR8Asjw';
+    
+    // Use CSV export - works perfectly for public sheets
+    const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=Videos`;
 
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: 'Videos!A2:D', // Assuming headers in row 1
-  });
+    const response = await fetch(url, {
+      cache: 'no-store',
+    });
 
-  const rows = response.data.values;
-  if (!rows || rows.length === 0) {
+    if (!response.ok) {
+      console.error('Failed to fetch sheet:', response.statusText);
+      return [];
+    }
+
+    const csvText = await response.text();
+    console.log('CSV Response:', csvText);
+    
+    // Parse CSV (skip first line which is headers)
+    const lines = csvText.trim().split('\n');
+    const dataLines = lines.slice(1); // Skip header row
+
+    return dataLines
+      .filter(line => line.trim())
+      .map((line, index) => {
+        // Remove quotes and split by comma
+        const values = line.split(',').map(v => v.replace(/^"|"$/g, '').trim());
+        
+        return {
+          id: values[0] || `video-${index}`,
+          url: values[1] || '',
+          title: values[2] || '',
+          description: values[3] || '',
+          thumnail: values[4] || '',
+        };
+      });
+  } catch (error) {
+    console.error('Error fetching videos from sheet:', error);
     return [];
   }
-
-  return rows.map((row, index) => ({
-    id: row[0] || `video-${index}`,
-    url: row[1] || '',
-    title: row[2] || '',
-    description: row[3] || '',
-  }));
 }
 
-export async function appendEnquiryToSheet(data: any) {
-  const sheets = await getGoogleSheetsClient();
-  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+export async function appendEnquiryToSheet(data: {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}) {
+  try {
+    const spreadsheetId = '1zGAHV_wZkZXDKWRBUHOTq_keislNMvTq8qwsAR8Asjw';
+    const apiKey = process.env.GOOGLE_API_KEY;
+    
+    if (!apiKey) {
+      throw new Error('Google API key not configured');
+    }
 
-  const values = [
-    [
-      new Date().toISOString(),
-      data.name,
-      data.email,
-      data.phone,
-      data.service,
-      data.message,
-    ],
-  ];
+    const range = 'Enquiries!A:F';
+    const values = [
+      [
+        new Date().toISOString(),
+        data.name,
+        data.email,
+        data.phone,
+        data.service,
+        data.message,
+      ],
+    ];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: 'Enquiries!A:F',
-    valueInputOption: 'USER_ENTERED',
-    requestBody: { values },
-  });
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${apiKey}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ values }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Error appending:', errorText);
+      throw new Error(`Failed to append: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error appending enquiry to sheet:', error);
+    throw error;
+  }
 }
