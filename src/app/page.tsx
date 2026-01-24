@@ -19,10 +19,9 @@ async function getVideos() {
 }
 export default async function Home() {
   const videos = await getVideos();
-  console.log(videos)
   return (
-    <main className="min-h-screen">
-      <HeroBanner videos={videos} />
+     <main className="min-h-screen mt-16 sm:mt-18 lg:mt-20">
+      <HeroBanner />
       <TrustCounters />
       <WhyChooseUs />
       <ServicesSnapshot />

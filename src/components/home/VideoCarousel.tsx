@@ -6,17 +6,18 @@ import Image from 'next/image';
 
 interface VideoCarouselProps {
   videos?: VideoData[];
+  isBackground?: boolean;
 }
 
-const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
+const VideoCarousel = ({ videos = [], isBackground = false }: VideoCarouselProps) => {
   console.log(videos);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set());
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const carouselRef = useRef<HTMLDivElement | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // Convert Google Drive thumbnail URLs to direct image format
   const getThumbnailUrl = (url: string): string => {
     if (!url) return '';
     
@@ -29,44 +30,51 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
     return url;
   };
 
-  // Convert Google Drive URLs to embed format
-  const getEmbedUrl = (url: string): string => {
-    if (url.includes('drive.google.com')) {
-      const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
-      if (fileMatch) {
-        return `https://drive.google.com/file/d/${fileMatch[1]}/preview`;
-      }
-    }
+  // Check if URL is from Google Drive
+  const isGoogleDrive = (url: string): boolean => {
+    return url.includes('drive.google.com');
+  };
 
+  // Check if URL is from YouTube
+  const isYouTube = (url: string): boolean => {
+    return url.includes('youtube.com') || url.includes('youtu.be');
+  };
+
+  // Get Google Drive embed URL (must use iframe, not video tag)
+  const getGoogleDriveEmbedUrl = (url: string): string => {
+    const fileMatch = url.match(/\/file\/d\/([^\/]+)/);
+    if (fileMatch && fileMatch[1]) {
+      // Use /preview endpoint for iframe embedding
+      return `https://drive.google.com/file/d/${fileMatch[1]}/preview`;
+    }
+    return url;
+  };
+
+  // Get YouTube embed URL
+  const getYouTubeEmbedUrl = (url: string): string => {
     if (url.includes('youtube.com/watch')) {
       const videoId = url.split('v=')[1]?.split('&')[0];
+      const controls = isBackground ? '&controls=0&showinfo=0&disablekb=1&modestbranding=1' : '';
       return videoId 
-        ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}` 
+        ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}${controls}` 
         : url;
     }
 
     if (url.includes('youtu.be/')) {
       const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+      const controls = isBackground ? '&controls=0&showinfo=0&disablekb=1&modestbranding=1' : '';
       return videoId 
-        ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}` 
+        ? `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}${controls}` 
         : url;
     }
 
     return url;
   };
 
-  const isEmbeddableVideo = (url: string): boolean => {
-    return url.includes('youtube.com') || 
-           url.includes('youtu.be') || 
-           url.includes('drive.google.com');
-  };
-
-  // Handle video loaded state
   const handleVideoLoaded = useCallback((index: number) => {
     setLoadedVideos((prev) => new Set(prev).add(index));
   }, []);
 
-  // Stop auto-play
   const stopAutoPlay = useCallback(() => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -74,7 +82,6 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
     }
   }, []);
 
-  // Start auto-play
   const startAutoPlay = useCallback(() => {
     if (videos.length <= 1 || !isVisible) return;
     
@@ -87,7 +94,18 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
     }, 60000);
   }, [videos.length, isVisible, stopAutoPlay]);
 
-  // Intersection Observer to detect when carousel enters viewport
+  // Auto-play current video when index changes (for non-iframe videos)
+  useEffect(() => {
+    if (isBackground && isVisible && videoRefs.current[currentIndex]) {
+      const videoElement = videoRefs.current[currentIndex];
+      if (videoElement) {
+        videoElement.play().catch((error) => {
+          console.log('Autoplay prevented:', error);
+        });
+      }
+    }
+  }, [currentIndex, isBackground, isVisible]);
+
   useEffect(() => {
     const options = {
       root: null,
@@ -98,6 +116,12 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         setIsVisible(entry.isIntersecting);
+        
+        if (entry.isIntersecting && isBackground && videoRefs.current[currentIndex]) {
+          videoRefs.current[currentIndex]?.play().catch((error) => {
+            console.log('Autoplay prevented:', error);
+          });
+        }
       });
     }, options);
 
@@ -110,9 +134,8 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
         observer.unobserve(carouselRef.current);
       }
     };
-  }, []);
+  }, [isBackground, currentIndex]);
 
-  // Start/stop autoplay based on visibility
   useEffect(() => {
     if (isVisible) {
       startAutoPlay();
@@ -125,7 +148,6 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
     };
   }, [isVisible, startAutoPlay, stopAutoPlay]);
 
-  // Navigation handlers
   const goToPrevious = () => {
     stopAutoPlay();
     setCurrentIndex((prevIndex) => 
@@ -162,11 +184,18 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
       ref={carouselRef}
       className="relative w-full h-[400px] md:h-[500px] lg:h-[600px] bg-black rounded-lg overflow-hidden"
     >
-      {/* Video Slides */}
       <div className="relative w-full h-full">
-        {videos.map((video:any, index) => {
-          const isEmbedded = isEmbeddableVideo(video.url);
-          const embedUrl = isEmbedded ? getEmbedUrl(video.url) : video.url;
+        {videos.map((video: any, index) => {
+          const isDrive = isGoogleDrive(video.url);
+          const isYT = isYouTube(video.url);
+          const isIframeVideo = isDrive || isYT;
+          
+          const embedUrl = isDrive 
+            ? getGoogleDriveEmbedUrl(video.url)
+            : isYT 
+            ? getYouTubeEmbedUrl(video.url)
+            : '';
+            
           const thumbnailUrl = getThumbnailUrl(video.thumbnail);
           const isActive = index === currentIndex;
           const isLoaded = loadedVideos.has(index);
@@ -178,8 +207,8 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
                 isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             >
-              {/* Thumbnail Placeholder - Only render if thumbnail URL exists */}
-              {!isLoaded && thumbnailUrl && (
+              {/* Thumbnail - only show when not loaded and not in background mode */}
+              {!isLoaded && thumbnailUrl && !isBackground && (
                 <div className="absolute inset-0 z-20">
                   <Image
                     src={thumbnailUrl}
@@ -192,47 +221,52 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
                       e.currentTarget.style.display = 'none';
                     }}
                   />
-                  {/* Loading Spinner */}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/30">
                     <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin" />
                   </div>
                 </div>
               )}
 
-              {/* Video Element - Conditionally render based on active state */}
-              {isEmbedded ? (
+              {/* Video Element - Use iframe for Google Drive and YouTube */}
+              {isIframeVideo ? (
                 isActive && isVisible ? (
                   <iframe
+                    key={`iframe-${video.id}-${index}-${isActive}`}
                     src={embedUrl}
                     className={`w-full h-full transition-opacity duration-500 ${
                       isLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
+                    } ${isBackground ? 'pointer-events-none' : ''}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                    allowFullScreen={!isBackground}
                     style={{ border: 'none' }}
                     title={video.title}
-                    onLoad={() => handleVideoLoaded(index)}
+                    onLoad={() => {
+                      handleVideoLoaded(index);
+                    }}
                   />
                 ) : (
                   <div className="w-full h-full bg-black" />
                 )
               ) : (
-                isActive && (
-                  <video
-                    src={video.url}
-                    className={`w-full h-full object-cover transition-opacity duration-500 ${
-                      isLoaded ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    autoPlay={isVisible}
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="auto"
-                    onLoadedData={() => handleVideoLoaded(index)}
-                    onCanPlayThrough={() => handleVideoLoaded(index)}
-                  />
-                )
+                // Regular video file (direct MP4, etc.)
+                <video
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                  }}
+                  src={video.url}
+                  className={`w-full h-full object-cover transition-opacity duration-500 ${
+                    isLoaded ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  autoPlay={isVisible && isBackground}
+                  muted
+                  loop
+                  playsInline
+                  controls={!isBackground}
+                  preload={isBackground ? 'auto' : 'metadata'}
+                  onLoadedData={() => handleVideoLoaded(index)}
+                  onCanPlayThrough={() => handleVideoLoaded(index)}
+                  style={{ display: isActive ? 'block' : 'none' }}
+                />
               )}
             </div>
           );
@@ -240,7 +274,7 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
       </div>
 
       {/* Navigation Arrows */}
-      {videos.length > 1 && (
+      {videos.length > 1 && !isBackground && (
         <>
           <button
             onClick={goToPrevious}
@@ -265,7 +299,7 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
       )}
 
       {/* Dot Indicators */}
-      {videos.length > 1 && (
+      {videos.length > 1 && !isBackground && (
         <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
           {videos.map((_, index) => (
             <button
@@ -283,11 +317,13 @@ const VideoCarousel = ({ videos = [] }: VideoCarouselProps) => {
       )}
 
       {/* Video Title Overlay */}
-      <div className="absolute bottom-12 md:bottom-16 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-4 md:px-6 py-3 md:py-4 pointer-events-none">
-        <h3 className="text-white text-base md:text-lg font-semibold">
-          {videos[currentIndex].title}
-        </h3>
-      </div>
+      {!isBackground && (
+        <div className="absolute bottom-12 md:bottom-16 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-4 md:px-6 py-3 md:py-4 pointer-events-none">
+          <h3 className="text-white text-base md:text-lg font-semibold">
+            {videos[currentIndex].title}
+          </h3>
+        </div>
+      )}
     </div>
   );
 };

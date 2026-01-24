@@ -1,7 +1,7 @@
 'use client';
 
 import { VideoData } from '@/lib/types';
-import VideoCarousel from './VideoCarouse';
+import VideoCarousel from './VideoCarousel';
 
 interface VideoSectionProps {
   videos?: VideoData[];

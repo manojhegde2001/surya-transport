@@ -4,17 +4,17 @@ import Link from 'next/link';
 
 const CTABanner = () => {
   return (
-    <section className="py-20 px-4 bg-gray-900 dark:bg-gray-950">
+    <section className="py-20 px-4 bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-gray-950 border-y border-gray-200 dark:border-gray-800">
       <div className="container mx-auto max-w-4xl text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
           Secure your factory logistics with a proven partner
         </h2>
-        <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
           Join 100+ OEMs and manufacturers who trust us for zero-disruption logistics
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 px-10 py-5 bg-white hover:bg-gray-100 text-gray-900 font-bold rounded-lg transition-colors text-lg"
+          className="inline-flex items-center gap-2 px-10 py-5 bg-gray-900 hover:bg-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 text-white dark:text-gray-900 font-bold rounded-lg transition-all duration-200 text-lg shadow-lg hover:shadow-xl hover:scale-105 transform"
         >
           Enquire for Contract Transportation
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
