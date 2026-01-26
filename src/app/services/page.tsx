@@ -8,49 +8,30 @@ const services = [
   {
     title: 'Contract Transportation',
     icon: HiTruck,
-    points: [
-      'Long-term contractual operations',
-      'Dedicated fleet for OEMs',
-      'Transparent costing model',
-    ],
+    points: ['Long-term contractual operations', 'Dedicated fleet for OEMs', 'Transparent costing model'],
   },
   {
     title: 'Long-Term OEM Contract Logistics',
     icon: HiClipboardList,
-    points: [
-      'Factory-aligned SOPs',
-      'Sequence supply for production lines',
-      'Zero disruption focus',
-    ],
+    points: ['Factory-aligned SOPs', 'Sequence supply for production lines', 'Zero disruption focus'],
   },
   {
     title: 'In-Plant Movement',
     icon: HiCog,
-    points: [
-      'Safety-compliant operations',
-      'Supervisor-controlled movements',
-      'Optimized for zero downtime',
-    ],
+    points: ['Safety-compliant operations', 'Supervisor-controlled movements', 'Optimized for zero downtime'],
   },
   {
     title: 'Customized Container Solutions',
     icon: HiAdjustments,
-    points: [
-      'Vehicle/container customization',
-      'Route and load optimization',
-      'Flexible for different OEM needs',
-    ],
+    points: ['Vehicle/container customization', 'Route and load optimization', 'Flexible for different OEM needs'],
   },
 ];
 
-const extraServices = [
-  'Dedicated Fleet Operations',
-  'Staff Transportation (as per contract)',
-];
+const extraServices = ['Dedicated Fleet Operations', 'Staff Transportation (as per contract)'];
 
 export default function ServicesPage() {
   return (
-    <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
+    <main className="min-h-screen bg-white dark:bg-gray-950 px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
       <section className="max-w-5xl mx-auto">
         <header className="mb-10 sm:mb-12">
           <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase">
@@ -60,8 +41,8 @@ export default function ServicesPage() {
             OEM-grade logistics for critical manufacturing operations
           </h1>
           <p className="mt-3 text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl">
-            Structured, long-term transport services designed around factory schedules,
-            zero production stoppage, and transparent costing.
+            Structured, long-term transport services designed around factory schedules, zero
+            production stoppage, and transparent costing.
           </p>
         </header>
 
@@ -71,7 +52,7 @@ export default function ServicesPage() {
             return (
               <div
                 key={service.title}
-                className="h-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 p-5 sm:p-6"
+                className="h-full rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 p-5 sm:p-6"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
@@ -81,7 +62,7 @@ export default function ServicesPage() {
                     {service.title}
                   </h2>
                 </div>
-                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                   {service.points.map((point) => (
                     <li key={point} className="flex gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-400 dark:bg-gray-500" />
@@ -98,7 +79,7 @@ export default function ServicesPage() {
           <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">
             Additional services
           </h3>
-          <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-600 dark:text-gray-300">
+          <ul className="grid gap-3 sm:grid-cols-2 text-sm text-gray-700 dark:text-gray-300">
             {extraServices.map((item) => (
               <li
                 key={item}
@@ -115,7 +96,7 @@ export default function ServicesPage() {
           <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
             Industries served
           </h3>
-          <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
             We currently support passenger vehicle OEMs, commercial vehicle OEMs, auto component
             manufacturers, and contract staff transportation requirements.
           </p>

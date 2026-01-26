@@ -45,7 +45,7 @@ const facilities = [
 
 export default function FacilityPage() {
   return (
-    <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
+    <main className="min-h-screen bg-white dark:bg-gray-950 px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
       <section className="max-w-5xl mx-auto">
         <header className="mb-10 sm:mb-12">
           <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase">
@@ -61,7 +61,7 @@ export default function FacilityPage() {
         </header>
 
         <section className="mb-8 sm:mb-10">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 px-4 sm:px-6 py-4 sm:py-5">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 px-4 sm:px-6 py-4 sm:py-5">
             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-200">
               Our in-house facilities are structured around one promise: uninterrupted logistics
               support for your factory operations, day and night.
@@ -75,7 +75,7 @@ export default function FacilityPage() {
             return (
               <div
                 key={item.title}
-                className="h-full rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 p-5 sm:p-6"
+                className="h-full rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 shadow-sm hover:shadow-md dark:hover:shadow-gray-900/50 transition-all duration-200 p-5 sm:p-6"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
@@ -90,7 +90,7 @@ export default function FacilityPage() {
                     </p>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{item.detail}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">{item.detail}</p>
               </div>
             );
           })}
@@ -100,13 +100,13 @@ export default function FacilityPage() {
           <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">
             Want dedicated infrastructure for your contract?
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
             We can structure dedicated yards, workshop capacity, and supervisor allocation for
             long-term high-volume contracts.
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center justify-center rounded-lg bg-gray-900 hover:bg-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200 text-white dark:text-gray-900 px-5 py-2.5 text-sm font-medium transition-colors"
+            className="inline-flex items-center justify-center rounded-lg bg-gray-900 hover:bg-black dark:bg-gray-100 dark:hover:bg-gray-200 text-white dark:text-gray-900 px-5 py-2.5 text-sm font-medium transition-colors shadow-sm"
           >
             Discuss dedicated infrastructure setup
           </a>

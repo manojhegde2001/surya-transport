@@ -8,7 +8,7 @@ const regions = ['Tamil Nadu', 'Kerala', 'Puducherry', 'Andhra Pradesh', 'Karnat
 
 export default function BusinessBackgroundPage() {
   return (
-    <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
+    <main className="min-h-screen bg-white dark:bg-gray-950 px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
       <section className="max-w-4xl mx-auto">
         <header className="mb-10 sm:mb-12">
           <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase">
@@ -23,7 +23,7 @@ export default function BusinessBackgroundPage() {
         </header>
 
         <section className="mb-8 sm:mb-10">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 sm:p-6">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 sm:p-6 shadow-sm">
             <div className="flex items-start gap-3 sm:gap-4">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 <HiDocumentText className="w-5 h-5" />
@@ -32,7 +32,7 @@ export default function BusinessBackgroundPage() {
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                   Company overview
                 </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   Surya Transport is a contract-based OEM logistics specialist focused on factory
                   supply, in-plant movement, and long-term lane commitments.
                 </p>
@@ -42,7 +42,7 @@ export default function BusinessBackgroundPage() {
         </section>
 
         <section className="grid gap-6 sm:grid-cols-2 mb-8 sm:mb-10">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 p-4 sm:p-5">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-4 sm:p-5 shadow-sm">
             <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase mb-1">
               Operational scale
             </p>
@@ -52,7 +52,7 @@ export default function BusinessBackgroundPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 p-4 sm:p-5">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-4 sm:p-5 shadow-sm">
             <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase mb-1">
               Contract model
             </p>
@@ -64,7 +64,7 @@ export default function BusinessBackgroundPage() {
         </section>
 
         <section className="mb-8 sm:mb-10">
-          <div className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 sm:p-6">
+          <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 sm:p-6 shadow-sm">
             <div className="flex items-start gap-3 sm:gap-4 mb-3">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
                 <HiGlobe className="w-5 h-5" />
@@ -91,7 +91,7 @@ export default function BusinessBackgroundPage() {
           </div>
         </section>
 
-        <section className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 p-5 sm:p-6">
+        <section className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-5 sm:p-6 shadow-sm">
           <div className="flex items-start gap-3 sm:gap-4">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
               <HiCheckCircle className="w-5 h-5" />
@@ -100,7 +100,7 @@ export default function BusinessBackgroundPage() {
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 Compliance and philosophy
               </h3>
-              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
                   <span>GST registered, with invoicing aligned to contract terms.</span>
