@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(req: NextRequest) {
   try {
     const { name, email, company, message } = await req.json();
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const { data, error } = await resend.emails.send({
       from: 'onboarding@resend.dev',
@@ -26,29 +26,26 @@ export async function POST(req: NextRequest) {
       <td align="center" style="padding: 40px 20px;">
         <table role="presentation" style="width: 100%; max-width: 600px; border-collapse: collapse; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" cellpadding="0" cellspacing="0">
           
-          <!-- Header -->
           <tr>
             <td style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); padding: 32px 40px; border-radius: 8px 8px 0 0;">
               <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #ffffff; letter-spacing: -0.5px;">
                 New Contract Enquiry
               </h1>
               <p style="margin: 8px 0 0 0; font-size: 14px; color: #a0a0a0;">
-                Received on ${new Date().toLocaleDateString('en-IN', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      })}
+                Received on ${new Date().toLocaleDateString('en-IN', { 
+                  day: 'numeric', 
+                  month: 'long', 
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
               </p>
             </td>
           </tr>
 
-          <!-- Content -->
           <tr>
             <td style="padding: 40px;">
               
-              <!-- Contact Details -->
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 32px;" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding: 16px; background-color: #f8f9fa; border-left: 4px solid #1a1a1a; border-radius: 4px;">
@@ -78,7 +75,6 @@ export async function POST(req: NextRequest) {
                 </tr>
               </table>
 
-              <!-- Message Section -->
               <div style="margin-bottom: 32px;">
                 <h2 style="margin: 0 0 12px 0; font-size: 14px; font-weight: 600; text-transform: uppercase; color: #6b7280; letter-spacing: 0.5px;">
                   Message
@@ -88,7 +84,6 @@ export async function POST(req: NextRequest) {
                 </div>
               </div>
 
-              <!-- CTA Button -->
               <table role="presentation" style="width: 100%; border-collapse: collapse;" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding: 8px 0;">
@@ -102,7 +97,6 @@ export async function POST(req: NextRequest) {
             </td>
           </tr>
 
-          <!-- Footer -->
           <tr>
             <td style="padding: 24px 40px; background-color: #f8f9fa; border-radius: 0 0 8px 8px; border-top: 1px solid #e5e7eb;">
               <p style="margin: 0; font-size: 12px; line-height: 1.5; color: #6b7280; text-align: center;">
@@ -118,15 +112,14 @@ export async function POST(req: NextRequest) {
   </table>
 </body>
 </html>
-`,
-
+      `,
     });
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
 
-    return NextResponse.json({ success: true, id: data.id });
+    return NextResponse.json({ success: true, id: data?.id });
   } catch (error) {
     console.error('Email error:', error);
     return NextResponse.json({ error: 'Failed to send' }, { status: 500 });
