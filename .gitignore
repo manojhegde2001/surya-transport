@@ -1,20 +1,77 @@
-# Firebase
-.firebase/
-*.cache
-
 # Dependencies
 node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
 
 # Next.js
-.next/
-out/
+/.next/
+/out/
+.next
+out
+build
 
-# Logs
-*.log
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# Environment
+# Local env files
 .env
 .env*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Firebase
+.firebase/
+.firebaserc
+firebase-debug.log
+firebase-debug.*.log
+*.cache
+.firebase-cache/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Turbopack
+.turbo/
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Uploads
+/public/uploads/
+/uploads/
+
+# Sensitive files
+.firebaserc
+firebase-adminsdk-*.json
+serviceAccountKey.json
