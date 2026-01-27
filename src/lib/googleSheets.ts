@@ -3,8 +3,6 @@
 export async function getVideosFromSheet() {
   try {
     const spreadsheetId = '1zGAHV_wZkZXDKWRBUHOTq_keislNMvTq8qwsAR8Asjw';
-    
-    // Use CSV export - works perfectly for public sheets
     const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=Videos`;
 
     const response = await fetch(url, {
@@ -17,16 +15,19 @@ export async function getVideosFromSheet() {
     }
 
     const csvText = await response.text();
-    console.log('CSV Response:', csvText);
     
-    // Parse CSV (skip first line which is headers)
+    // Check if response is actually CSV, not HTML error
+    if (csvText.startsWith('<!DOCTYPE') || csvText.startsWith('<html')) {
+      console.error('Received HTML instead of CSV');
+      return [];
+    }
+    
     const lines = csvText.trim().split('\n');
-    const dataLines = lines.slice(1); // Skip header row
+    const dataLines = lines.slice(1);
 
     return dataLines
       .filter(line => line.trim())
       .map((line, index) => {
-        // Remove quotes and split by comma
         const values = line.split(',').map(v => v.replace(/^"|"$/g, '').trim());
         
         return {
@@ -42,7 +43,6 @@ export async function getVideosFromSheet() {
     return [];
   }
 }
-
 export async function appendEnquiryToSheet(data: {
   name: string;
   email: string;
