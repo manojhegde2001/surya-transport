@@ -5,8 +5,9 @@ export async function getVideosFromSheet() {
     const spreadsheetId = '1zGAHV_wZkZXDKWRBUHOTq_keislNMvTq8qwsAR8Asjw';
     const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=Videos`;
 
+    // Change from 'no-store' to revalidate for static export
     const response = await fetch(url, {
-      cache: 'no-store',
+      next: { revalidate: 3600 } // Cache for 1 hour
     });
 
     if (!response.ok) {
@@ -43,6 +44,12 @@ export async function getVideosFromSheet() {
     return [];
   }
 }
+
+// This function cannot work with static export - remove it or move to client-side
+// For static export, you need to handle form submissions differently:
+// Option 1: Use a third-party form service (Formspree, Google Forms embed, etc.)
+// Option 2: Call Google Sheets API directly from client-side
+// Option 3: Use mailto: links
 export async function appendEnquiryToSheet(data: {
   name: string;
   email: string;
@@ -50,45 +57,10 @@ export async function appendEnquiryToSheet(data: {
   service: string;
   message: string;
 }) {
-  try {
-    const spreadsheetId = '1zGAHV_wZkZXDKWRBUHOTq_keislNMvTq8qwsAR8Asjw';
-    const apiKey = process.env.GOOGLE_API_KEY;
-    
-    if (!apiKey) {
-      throw new Error('Google API key not configured');
-    }
-
-    const range = 'Enquiries!A:F';
-    const values = [
-      [
-        new Date().toISOString(),
-        data.name,
-        data.email,
-        data.phone,
-        data.service,
-        data.message,
-      ],
-    ];
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}:append?valueInputOption=USER_ENTERED&key=${apiKey}`;
-
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ values }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Error appending:', errorText);
-      throw new Error(`Failed to append: ${response.statusText}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error appending enquiry to sheet:', error);
-    throw error;
-  }
+  // This will NOT work with output: 'export'
+  // You must either:
+  // 1. Remove this function and use client-side alternative
+  // 2. Upgrade to Firebase Blaze plan
+  
+  throw new Error('Server-side API calls not supported in static export. Use client-side Google Sheets API or third-party form service.');
 }
