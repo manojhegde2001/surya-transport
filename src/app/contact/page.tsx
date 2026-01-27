@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { HiMail, HiUser, HiPhone, HiOfficeBuilding, HiClipboardList } from 'react-icons/hi';
+import { HiMail, HiUser, HiOfficeBuilding } from 'react-icons/hi';
 
 const clientNames = [
   'Myong Shin India',
@@ -14,11 +14,39 @@ const clientNames = [
 
 export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
- 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => setSubmitting(false), 1000);
+    setStatus('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setStatus('Message sent successfully!');
+        e.currentTarget.reset();
+      } else {
+        setStatus('Failed to send. Please try again.');
+      }
+    } catch (error) {
+      setStatus('Error occurred. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -42,27 +70,10 @@ export default function ContactPage() {
             onSubmit={handleSubmit}
             className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-5 sm:p-6 shadow-sm"
           >
-            <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Company Name
-                </label>
-                <div className="relative">
-                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
-                    <HiOfficeBuilding className="w-4 h-4" />
-                  </span>
-                  <input
-                    type="text"
-                    required
-                    className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                    placeholder="Your organization name"
-                  />
-                </div>
-              </div>
-
+            <div className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Contact Person
+                  Name *
                 </label>
                 <div className="relative">
                   <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -70,16 +81,17 @@ export default function ContactPage() {
                   </span>
                   <input
                     type="text"
+                    name="name"
                     required
                     className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                    placeholder="Full name"
+                    placeholder="Your name"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Email
+                  Email *
                 </label>
                 <div className="relative">
                   <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
@@ -87,93 +99,57 @@ export default function ContactPage() {
                   </span>
                   <input
                     type="email"
+                    name="email"
                     required
                     className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                    placeholder="work.email@example.com"
+                    placeholder="your.email@example.com"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Phone
+                  Company *
                 </label>
                 <div className="relative">
                   <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
-                    <HiPhone className="w-4 h-4" />
-                  </span>
-                  <input
-                    type="tel"
-                    required
-                    className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                    placeholder="With country code"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Nature of Requirement
-                </label>
-                <div className="relative">
-                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
-                    <HiClipboardList className="w-4 h-4" />
+                    <HiOfficeBuilding className="w-4 h-4" />
                   </span>
                   <input
                     type="text"
+                    name="company"
                     required
                     className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                    placeholder="Contract transportation, in-plant, dedicated fleet, etc."
+                    placeholder="Your company name"
                   />
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Approx. Fleet Requirement
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                  placeholder="e.g. 20 trailers, 40-foot containers"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Location / Route
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                  placeholder="Origin, destination, in-plant details"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Expected Start Date
-                </label>
-                <input
-                  type="date"
-                  className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
-                  Message
+                  Message *
                 </label>
                 <textarea
+                  name="message"
                   required
-                  rows={4}
+                  rows={5}
                   className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                  placeholder="Briefly describe your plant, volume, and contract expectation."
+                  placeholder="Briefly describe your requirement..."
                 />
               </div>
             </div>
+
+            {status && (
+              <p
+                className={`mt-4 text-sm ${
+                  status.includes('success')
+                    ? 'text-green-600 dark:text-green-400'
+                    : 'text-red-600 dark:text-red-400'
+                }`}
+              >
+                {status}
+              </p>
+            )}
 
             <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
               Form submissions are routed to our contracts team for email-based discussion. No
@@ -197,9 +173,12 @@ export default function ContactPage() {
               <ul className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
                 <li>
                   Email:{' '}
-                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <a
+                    href="mailto:contracts@surya-transport.in"
+                    className="font-medium text-gray-900 dark:text-gray-100 hover:underline"
+                  >
                     contracts@surya-transport.in
-                  </span>
+                  </a>
                 </li>
                 <li>Business hours: 10 AM – 6 PM</li>
                 <li>Working days: Monday – Saturday</li>
