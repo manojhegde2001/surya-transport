@@ -16,38 +16,42 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setStatus('');
+ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSubmitting(true);
+  setStatus('');
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      message: formData.get('message'),
-    };
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setStatus('Message sent successfully!');
-        e.currentTarget.reset();
-      } else {
-        setStatus('Failed to send. Please try again.');
-      }
-    } catch (error) {
-      setStatus('Error occurred. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  const data = {
+    name: formData.get('name'),
+    email: formData.get('email'),
+    company: formData.get('company'),
+    message: formData.get('message'),
   };
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      setStatus('Message sent successfully!');
+      form.reset();
+    } else {
+      setStatus(result.error || 'Failed to send. Please try again.');
+    }
+  } catch (error) {
+    console.error('Contact form error:', error);
+    setStatus('Error occurred. Please try again.');
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <main className="min-h-screen bg-white dark:bg-gray-950 px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
