@@ -2,11 +2,11 @@
 
 const InfrastructureTrust = () => {
   const features = [
-    { label: '24/7 Operations', icon: '🕐' },
-    { label: 'Own Workshop + 24/7 Spares', icon: '🔧' },
-    { label: 'Standby Trucks', icon: '🚛' },
     { label: 'Transparent Costing', icon: '💎' },
-    { label: 'GST Registered', icon: '✅' },
+    { label: 'Customizable Containers', icon: '📦' },
+    { label: '24/7 GPS Tracking', icon: '📍' },
+    { label: 'Onsite Supervisors', icon: '👨‍💼' },
+    { label: 'Experienced Driver Fleet', icon: '🚛' },
   ];
 
   return (

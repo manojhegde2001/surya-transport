@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { HiMail, HiUser, HiOfficeBuilding } from 'react-icons/hi';
+import { HiMail, HiUser, HiOfficeBuilding, HiPhone } from 'react-icons/hi';
 
 const clientNames = [
   'Myong Shin India',
@@ -34,7 +34,7 @@ export default function ContactPage() {
       });
 
       if (response.ok) {
-        setStatus('Message sent successfully!');
+        setStatus('Message sent successfully! Our team will respond shortly.');
         form.reset();
       } else {
         setStatus('Failed to send. Please try again.');
@@ -55,11 +55,11 @@ export default function ContactPage() {
             Contact Us
           </p>
           <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-            Contract enquiries only
+            Get in Touch
           </h1>
           <p className="mt-3 text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl">
             Share your OEM or supplier logistics requirement and our team will respond with a
-            contract-focused discussion.
+            tailored solution for your needs.
           </p>
         </header>
 
@@ -125,6 +125,23 @@ export default function ContactPage() {
 
               <div>
                 <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+                  Phone
+                </label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-gray-400">
+                    <HiPhone className="w-4 h-4" />
+                  </span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-9 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
+                    placeholder="Your contact number"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">
                   Message *
                 </label>
                 <textarea
@@ -132,7 +149,7 @@ export default function ContactPage() {
                   required
                   rows={5}
                   className="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-3 py-2.5 text-sm text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-100"
-                  placeholder="Briefly describe your requirement..."
+                  placeholder="Briefly describe your logistics requirements..."
                 />
               </div>
             </div>
@@ -149,43 +166,47 @@ export default function ContactPage() {
               </p>
             )}
 
-            <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
-              Form submissions are routed to our contracts team for email-based discussion. No
-              instant quote is generated.
-            </p>
-
             <button
               type="submit"
               disabled={submitting}
               className="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-gray-900 hover:bg-black dark:bg-gray-100 dark:hover:bg-gray-200 text-white dark:text-gray-900 px-5 py-2.5 text-sm font-medium transition-colors disabled:opacity-70 shadow-sm"
             >
-              {submitting ? 'Submitting…' : 'Submit contract enquiry'}
+              {submitting ? 'Submitting…' : 'Submit Enquiry'}
             </button>
           </form>
 
           <aside className="space-y-6">
             <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/70 p-4 sm:p-5">
-              <h2 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                Contact information
+              <h2 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                Contact Information
               </h2>
-              <ul className="space-y-1.5 text-sm text-gray-600 dark:text-gray-300">
-                <li>
-                  Email:{' '}
-                  <a
-                    href="mailto:manojhegde2001@gmail.com"
-                    className="font-medium text-gray-900 dark:text-gray-100 hover:underline"
-                  >
-                    manojhegde2001@gmail.com
-                  </a>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <li className="flex items-start gap-2">
+                  <HiMail className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">Email</span>
+                    <a
+                      href="mailto:manojhegde2001@gmail.com"
+                      className="font-medium text-gray-900 dark:text-gray-100 hover:underline"
+                    >
+                      manojhegde2001@gmail.com
+                    </a>
+                  </div>
                 </li>
-                <li>Business hours: 10 AM – 6 PM</li>
-                <li>Working days: Monday – Saturday</li>
+                <li>
+                  <span className="block text-xs text-gray-500 dark:text-gray-400 mb-0.5">Business Hours</span>
+                  <span className="text-gray-900 dark:text-gray-100">10 AM – 6 PM</span>
+                </li>
+                <li>
+                  <span className="block text-xs text-gray-500 dark:text-gray-400 mb-0.5">Working Days</span>
+                  <span className="text-gray-900 dark:text-gray-100">Monday – Saturday</span>
+                </li>
               </ul>
             </div>
 
             <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/80 p-4 sm:p-5 shadow-sm">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">
-                Select client references
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
+                Trusted by Leading OEMs
               </h3>
               <div className="flex flex-wrap gap-2">
                 {clientNames.map((name) => (

@@ -15,7 +15,7 @@ export default function BusinessBackgroundPage() {
             Business Background
           </p>
           <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-            Company background for procurement teams
+            Company Background for Procurement Teams
           </h1>
           <p className="mt-3 text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-2xl">
             Summary for audit and vendor onboarding teams evaluating long-term contract logistics partners.
@@ -30,11 +30,13 @@ export default function BusinessBackgroundPage() {
               </span>
               <div>
                 <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                  Company overview
+                  Company Overview
                 </h2>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   Surya Transport is a contract-based OEM logistics specialist focused on factory
-                  supply, in-plant movement, and long-term lane commitments.
+                  supply, in-plant movement, sequence material transportation, and long-term lane
+                  commitments with nearly four decades of experience in automobile parts transportation
+                  across South India.
                 </p>
               </div>
             </div>
@@ -44,21 +46,21 @@ export default function BusinessBackgroundPage() {
         <section className="grid gap-6 sm:grid-cols-2 mb-8 sm:mb-10">
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-4 sm:p-5 shadow-sm">
             <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase mb-1">
-              Operational scale
+              Operational Scale
             </p>
             <p className="text-sm text-gray-700 dark:text-gray-200">
-              Approx. 220 trucks and around 1,500 trips per day across multiple OEM and supplier
-              locations in South India.
+              More than 200 trucks delivering seamless, time-critical logistics for major automobile
+              manufacturers across multiple OEM and supplier locations in South India.
             </p>
           </div>
 
           <div className="rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900/70 p-4 sm:p-5 shadow-sm">
             <p className="text-xs font-semibold tracking-wide text-gray-500 dark:text-gray-400 uppercase mb-1">
-              Contract model
+              Contract Model
             </p>
             <p className="text-sm text-gray-700 dark:text-gray-200">
-              Primarily long-term contracts with OEMs and tier suppliers with fixed and variable
-              components, aligned to production.
+              Primarily long-term contracts with OEMs and tier suppliers with transparent costing
+              aligned to operational metrics and production schedules.
             </p>
           </div>
         </section>
@@ -71,7 +73,7 @@ export default function BusinessBackgroundPage() {
               </span>
               <div>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
-                  Regions served
+                  Regions Served
                 </h3>
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
                   Operations currently span key manufacturing belts across South India.
@@ -98,20 +100,24 @@ export default function BusinessBackgroundPage() {
             </span>
             <div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                Compliance and philosophy
+                Compliance and Philosophy
               </h3>
               <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
-                  <span>GST registered, with invoicing aligned to contract terms.</span>
+                  <span>GST registered, with invoicing aligned to contract terms</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
-                  <span>Operational philosophy centered on zero disruption and transparent costing.</span>
+                  <span>Operational philosophy centered on zero disruption and transparent costing</span>
                 </li>
                 <li className="flex gap-2">
                   <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
-                  <span>Documented SOPs and on-site supervision at critical OEM locations.</span>
+                  <span>Integration of HMI safety standards and operational best practices</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-gray-500 dark:bg-gray-400" />
+                  <span>Documented SOPs and on-site supervision at critical OEM locations</span>
                 </li>
               </ul>
             </div>

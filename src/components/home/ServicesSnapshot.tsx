@@ -5,29 +5,29 @@ import Link from 'next/link';
 const ServicesSnapshot = () => {
   const services = [
     {
-      title: 'Contract Transportation',
-      description: 'Long-term contractual operations with dedicated fleet and transparent costing',
-      icon: '📋',
-    },
-    {
-      title: 'Long-Term OEM Contract Logistics',
-      description: 'Factory-aligned SOPs, sequence supply, and zero disruption focus',
-      icon: '🏭',
-    },
-    {
       title: 'In-Plant Movement',
-      description: 'Safety-compliant operations with supervisor-controlled movements',
+      description: 'Seamless material transport within your factory, minimizing production delays through optimized internal logistics',
       icon: '🔄',
     },
     {
-      title: 'Customized Container Solutions',
-      description: 'Vehicle and container customization for specific requirements',
-      icon: '📦',
+      title: 'Inter SIPCOT – Local',
+      description: 'Quick and reliable shuttle-run service between nearby industrial sites with flexible daily trips',
+      icon: '🚚',
     },
     {
-      title: 'Dedicated Fleet Operations',
-      description: 'Fully managed fleet with on-site supervisors and maintenance',
-      icon: '🚛',
+      title: 'State to State (Full Truck Load)',
+      description: 'Dedicated full-truck transport across states with secure, timely, and cost-effective bulk shipments',
+      icon: '🛣️',
+    },
+    {
+      title: 'Sequence Transport',
+      description: 'Just-in-time delivery of spare parts to assembly lines, ensuring uninterrupted production and line efficiency',
+      icon: '⚙️',
+    },
+    {
+      title: 'Warehousing',
+      description: 'Safe, organized storage with real-time inventory tracking and flexible short-term or long-term solutions',
+      icon: '🏭',
     },
   ];
 
@@ -39,7 +39,7 @@ const ServicesSnapshot = () => {
             Our Services
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Comprehensive logistics solutions for OEM and manufacturing operations
+            End-to-end logistics solutions ensuring continuity, precision, and cost clarity for factory operations
           </p>
         </div>
 

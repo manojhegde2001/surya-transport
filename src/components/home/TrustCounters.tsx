@@ -2,11 +2,11 @@
 
 const TrustCounters = () => {
   const counters = [
-    { value: '38+', label: 'Years Experience', icon: '🏆' },
-    { value: '220+', label: 'Trucks', icon: '🚛' },
-    { value: '1,500+', label: 'Trips / Day', icon: '📦' },
-    { value: '100%', label: 'Customized Fleet Solutions', icon: '⚙️' },
-    { value: '24/7', label: 'OEM & Factory-Focused', icon: '🏭' },
+    { value: '38+', label: 'Years of Excellence', icon: '🏆' },
+    { value: '200+', label: 'Trucks Fleet', icon: '🚛' },
+    { value: '24/7', label: 'Operations', icon: '🕐' },
+    { value: '100%', label: 'GPS Tracked Fleet', icon: '📍' },
+    { value: '1:10', label: 'Supervisor to Truck Ratio', icon: '👨‍💼' },
   ];
 
   return (

@@ -3,29 +3,31 @@
 const WhyChooseUs = () => {
   const features = [
     {
-      title: 'Zero Production Disruption',
+      title: 'Transparent Costing',
       points: [
-        '24+ years with automobile manufacturers',
-        'No production stoppage caused by logistics',
+        'Real-time pricing aligned with truck mileage and fuel costs',
+        'Month-on-month adjustments based on actual data',
+        'Full visibility into every cost component',
       ],
-      icon: '🛡️',
+      icon: '💎',
     },
     {
-      title: 'Cost Transparency & Flexibility',
+      title: '24/7 GPS Tracking',
       points: [
-        'Variable cost adjustment (diesel, tyre, battery)',
-        'Real-time costing calculator (future-ready)',
+        'Real-time monitoring of all shipments',
+        'Complete visibility throughout transportation',
+        'Peace of mind with live location updates',
       ],
-      icon: '💰',
+      icon: '📍',
     },
     {
-      title: 'Fast Recovery During Breakdowns',
+      title: 'Onsite Supervision',
       points: [
-        '24/7 workshop',
-        'Standby trucks',
-        'On-site supervisors',
+        'Dedicated supervisor for every 10 trucks',
+        'Quick issue resolution and efficient handling',
+        'Smooth operations at every transport stage',
       ],
-      icon: '⚡',
+      icon: '👨‍💼',
     },
   ];
 
@@ -34,10 +36,10 @@ const WhyChooseUs = () => {
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Why Businesses Choose Us
+            Why Choose Surya Transport
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Proven reliability and operational excellence for factory-focused logistics
+            Delivering reliability, transparency, and operational excellence in factory-focused logistics
           </p>
         </div>
 
