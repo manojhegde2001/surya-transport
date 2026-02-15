@@ -110,7 +110,7 @@ export default function ServicesPage() {
           <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
             We currently support passenger vehicle OEMs, commercial vehicle OEMs, auto component
             manufacturers across South India, delivering seamless, time-critical transportation
-            for major automobile manufacturers.
+            for leading companies.
           </p>
           <a
             href="/contact"

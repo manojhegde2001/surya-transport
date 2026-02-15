@@ -45,9 +45,7 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Why Choose Surya Transport
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Delivering reliability, transparency, and operational excellence in factory-focused logistics
-          </p>
+         
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

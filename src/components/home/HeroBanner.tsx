@@ -36,12 +36,12 @@ const HeroBanner = () => {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-white dark:text-gray-50 mb-3 lg:mb-4 leading-tight">
-            Trusted Partner in<br />
-            Factory-Focused OEM Logistics <span className="text-gray-300 dark:text-gray-400">Since 1986</span>
+            Reliability isn’t a promise we make.
+            It’s a habit we’ve built since 1986.
           </h1>
-          
+
           <p className="text-base sm:text-lg md:text-lg lg:text-xl text-gray-300 dark:text-gray-400 mb-4 lg:mb-6 max-w-2xl">
-            Round-the-clock logistics solutions ensuring seamless factory operations with transparent costing
+            Round the clock logistics solutions ensuring seamless operations with transparent costing
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">

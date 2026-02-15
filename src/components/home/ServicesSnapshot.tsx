@@ -51,9 +51,8 @@ const ServicesSnapshot = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Our Services
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Reliability isn’t a promise we make. 
-It’s a habit we’ve built since 1986.
+          <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            End-to-end logistics solutions ensuring continuity, precision, and cost clarity across your operations.
           </p>
         </div>
 
