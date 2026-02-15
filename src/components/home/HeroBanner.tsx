@@ -16,8 +16,8 @@ const HeroBanner = () => {
           className="w-full h-full object-cover opacity-100 dark:opacity-80"
           poster="/truck-video-poster.jpg"
         >
-          <source src="/truck-video.mp4" type="video/mp4" />
-          {/* <source src="/logistics_hub.mp4" type="video/mp4" /> */}
+          {/* <source src="/truck-video.mp4" type="video/mp4" /> */}
+          <source src="/logistics_hub.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

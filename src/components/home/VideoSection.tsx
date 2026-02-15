@@ -8,6 +8,7 @@ interface VideoSectionProps {
 }
 
 const VideoSection = ({ videos = [] }: VideoSectionProps) => {
+  if (videos?.length === 0) return null
   return (
     <section className="py-20 px-4 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto max-w-5xl">

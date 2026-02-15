@@ -1,5 +1,12 @@
 'use client';
 
+import {
+  HiOutlineCurrencyRupee,
+  HiOutlineLocationMarker,
+  HiOutlineUserGroup,
+  HiOutlineCheckCircle,
+} from 'react-icons/hi';
+
 const WhyChooseUs = () => {
   const features = [
     {
@@ -9,7 +16,7 @@ const WhyChooseUs = () => {
         'Month-on-month adjustments based on actual data',
         'Full visibility into every cost component',
       ],
-      icon: '💎',
+      icon: HiOutlineCurrencyRupee,
     },
     {
       title: '24/7 GPS Tracking',
@@ -18,7 +25,7 @@ const WhyChooseUs = () => {
         'Complete visibility throughout transportation',
         'Peace of mind with live location updates',
       ],
-      icon: '📍',
+      icon: HiOutlineLocationMarker,
     },
     {
       title: 'Onsite Supervision',
@@ -27,7 +34,7 @@ const WhyChooseUs = () => {
         'Quick issue resolution and efficient handling',
         'Smooth operations at every transport stage',
       ],
-      icon: '👨‍💼',
+      icon: HiOutlineUserGroup,
     },
   ];
 
@@ -44,25 +51,34 @@ const WhyChooseUs = () => {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-700"
-            >
-              <div className="text-5xl mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
-                {feature.title}
-              </h3>
-              <ul className="space-y-2">
-                {feature.points.map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-gray-600 dark:text-gray-400">
-                    <span className="text-green-500 mt-1">✓</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+
+            return (
+              <div
+                key={index}
+                className="bg-white dark:bg-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-700"
+              >
+                <Icon className="text-5xl mb-4 text-blue-600 dark:text-blue-400" />
+
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                  {feature.title}
+                </h3>
+
+                <ul className="space-y-2">
+                  {feature.points.map((point, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2 text-gray-600 dark:text-gray-400"
+                    >
+                      <HiOutlineCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

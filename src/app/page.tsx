@@ -28,7 +28,7 @@ export default async function Home() {
       <WhyChooseUs />
       <ServicesSnapshot />
       <InfrastructureTrust />
-      <VideoSection videos={videos as any} />
+      {/* <VideoSection videos={videos as any} /> */}
       <CTABanner />
     </main>
   );

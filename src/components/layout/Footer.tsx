@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { HiMail } from 'react-icons/hi';
 
 const Footer = () => {
   const quickLinks = [
@@ -108,7 +109,15 @@ const Footer = () => {
               <li className="text-gray-900 dark:text-white font-medium">
                 10 AM – 6 PM (Working days)
               </li>
-              <li className="mt-4">GST Registered</li>
+              <div className="flex items-center gap-2 text-sm text-slate-700 dark:text-gray-300">
+                <HiMail className="text-slate-600 dark:text-gray-400" />
+                <a
+                  href="mailto:suryatransports@yahoo.com"
+                  className="font-medium underline"
+                >
+                  suryatransports@yahoo.com
+                </a>
+              </div>
             </ul>
           </div>
         </div>
