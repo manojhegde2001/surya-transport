@@ -17,13 +17,15 @@ const HamburgerIcon = () => (
   <svg
     className="w-6 h-6"
     fill="none"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    stroke="currentColor"
     strokeWidth="2"
     viewBox="0 0 24 24"
-    stroke="currentColor"
   >
-    <path d="M4 6h16M4 12h16M4 18h16" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
   </svg>
 );
 
@@ -56,18 +58,25 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  /* Scroll effect */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* Lock body scroll */
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+  /* Close menu on route change */
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const navLinks = [
     { name: "Services", href: "/services", icon: HiCog },
@@ -81,6 +90,7 @@ export default function Header() {
 
   return (
     <>
+      {/* HEADER */}
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           scrolled
@@ -92,9 +102,9 @@ export default function Header() {
           <div className="flex h-16 lg:h-20 items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3">
-              <Logo className="w-10 h-10 text-gray-900 dark:text-white" />
+              <Logo className="w-9 h-9 text-gray-900 dark:text-white" />
               <div>
-                <div className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-lg font-bold text-gray-900 dark:text-white">
                   Surya Transport
                 </div>
                 <div className="text-xs text-gray-600 dark:text-gray-400">
@@ -107,17 +117,15 @@ export default function Header() {
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
                 const Icon = link.icon;
-                const active = isActive(link.href);
-
                 return (
                   <Link
                     key={link.name}
                     href={link.href}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition
                       ${
-                        active
+                        isActive(link.href)
                           ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
-                          : "text-gray-700 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-800"
+                          : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
                       }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -130,16 +138,19 @@ export default function Header() {
                 href="/contact"
                 className="ml-3 px-5 py-2 rounded-lg text-sm font-medium
                   bg-blue-900 text-white hover:bg-blue-800
-                  dark:bg-blue-100 dark:text-blue-900 dark:hover:bg-blue-200"
+                  dark:bg-blue-100 dark:text-blue-900"
               >
                 Enquire Now
               </Link>
             </div>
 
-            {/* Mobile Toggle */}
+            {/* Mobile Hamburger */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="lg:hidden p-2 rounded-lg text-gray-900 dark:text-white
+                hover:bg-gray-100 dark:hover:bg-gray-800
+                focus:outline-none focus:ring-2 focus:ring-blue-500"
               onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
             >
               <HamburgerIcon />
             </button>
@@ -147,7 +158,70 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* Mobile menu remains unchanged */}
+      {/* MOBILE MENU – TOP TO BOTTOM */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-opacity duration-300 ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Drawer */}
+        <div
+          className={`absolute top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-xl
+            transform transition-all duration-500 ease-in-out
+            ${isMenuOpen ? "translate-y-0" : "-translate-y-full"}
+          `}
+        >
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+            <div className="flex items-center gap-3">
+              <Logo className="w-8 h-8 text-gray-900 dark:text-white" />
+              <span className="font-bold text-gray-900 dark:text-white">
+                Surya Transport
+              </span>
+            </div>
+
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <HiX className="w-6 h-6 text-gray-900 dark:text-white" />
+            </button>
+          </div>
+
+          {/* Links */}
+          <div className="px-6 py-6 space-y-2">
+            {navLinks.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg
+                    text-gray-800 dark:text-gray-200
+                    hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                >
+                  <Icon className="w-5 h-5" />
+                  {link.name}
+                </Link>
+              );
+            })}
+
+            <Link
+              href="/contact"
+              className="block mt-6 text-center px-4 py-3 rounded-lg
+                bg-blue-900 text-white font-medium hover:bg-blue-800 transition"
+            >
+              Enquire Now
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
