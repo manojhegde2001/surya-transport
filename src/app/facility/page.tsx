@@ -1,3 +1,4 @@
+import { FaTools } from 'react-icons/fa';
 import { GiCash } from 'react-icons/gi';
 import { HiCurrencyDollar, HiTruck, HiLocationMarker, HiUserGroup, HiUsers } from 'react-icons/hi';
 
@@ -25,10 +26,16 @@ const facilities = [
       'All our trucks are equipped with real-time GPS tracking, allowing clients to monitor shipments at any time. This ensures full visibility and peace of mind throughout the transportation process.',
   },
   {
-    title: 'Onsite Supervisors',
+    title: 'Operational Team',
     icon: HiUserGroup,
     description:
-      'We have a dedicated supervisor for every group of 10 trucks, ensuring smooth operations, quick issue resolution, and efficient handling at every stage of transport.',
+      'A highly trained and professional team that ensures trucks and operations run smoothly through every stage of the process.',
+  },
+  {
+    title: 'In-house Workshop',
+    icon: FaTools,
+    description:
+      'A dedicated in-house workshop with 24/7 availability of mechanics and spare parts, minimizing truck downtime and enhancing overall operational efficiency.',
   },
   {
     title: 'Driver Fleet',

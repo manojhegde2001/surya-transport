@@ -1,5 +1,6 @@
 'use client';
 
+import { FaTools } from 'react-icons/fa';
 import {
   HiOutlineCurrencyRupee,
   HiOutlineCube,
@@ -7,20 +8,22 @@ import {
   HiOutlineUserGroup,
   HiOutlineTruck,
 } from 'react-icons/hi';
+import { RiToolsFill } from 'react-icons/ri';
 
 const InfrastructureTrust = () => {
   const features = [
     { label: 'Transparent Costing', icon: HiOutlineCurrencyRupee },
     { label: 'Customizable Containers', icon: HiOutlineCube },
     { label: '24/7 GPS Tracking', icon: HiOutlineLocationMarker },
-    { label: 'Onsite Supervisors', icon: HiOutlineUserGroup },
+    { label: 'Operational Team', icon: HiOutlineUserGroup },
     { label: 'Experienced Driver Fleet', icon: HiOutlineTruck },
+    { label: 'In-house Workshop', icon: RiToolsFill },
   ];
 
   return (
     <section className="py-12 px-4 bg-gray-50 dark:bg-gray-900 border-y border-gray-200 dark:border-gray-800 transition-colors duration-200">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
           {features.map((feature, index) => {
             const Icon = feature.icon;
 
