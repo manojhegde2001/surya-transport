@@ -18,7 +18,8 @@ const clients = [
   { name: 'Hwashin', logo: '/clients/Hwashin.jpeg' },
   { name: 'Hyundai', logo: '/clients/Hyundai.jpeg' },
   { name: 'Hyundai Mobis', logo: '/clients/Hyundai_Mobis.png' },
-  { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' }
+  { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
+  { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
 ];
 
 export default function ContactPage() {
