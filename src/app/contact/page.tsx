@@ -39,10 +39,19 @@ export default function ContactPage() {
         headers: { Accept: 'application/json' }
       });
 
-      setStatus(response.ok ? 'success' : 'error');
-      if (response.ok) e.currentTarget.reset();
-    } catch {
+      // Check the actual status code instead of just response.ok
+      if (response.status === 200) {
+        setStatus('success');
+        e.currentTarget.reset();
+      } else {
+        // Try to parse error details from response
+        const data = await response.json();
+        setStatus('error');
+        console.error('Form submission error:', data);
+      }
+    } catch (error) {
       setStatus('error');
+      console.error('Network error:', error);
     } finally {
       setSubmitting(false);
     }
