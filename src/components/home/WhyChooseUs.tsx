@@ -28,12 +28,13 @@ const WhyChooseUs = () => {
       icon: HiOutlineLocationMarker,
     },
     {
-      title: 'Onsite Supervision',
+      title: 'Operational Team',
       points: [
-        'Dedicated supervisor for every 10 trucks',
-        'Quick issue resolution and efficient handling',
-        'Smooth operations at every transport stage',
+        'Highly trained and professional operations staff',
+        'Ensures smooth truck movement at every stage of the process',
+        'Proactive monitoring and quick resolution of operational issues',
       ],
+
       icon: HiOutlineUserGroup,
     },
   ];
@@ -45,7 +46,7 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Why Choose Surya Transport
           </h2>
-         
+
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
