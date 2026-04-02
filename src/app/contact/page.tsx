@@ -20,7 +20,7 @@ const clients = [
   { name: 'Hyundai Mobis', logo: '/clients/Hyundai_Mobis.png' },
   { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
   { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
-  { name: 'Kausikh', logo: '/clients/Kausikh.jpeg' },
+  { name: 'Kausikh', logo: '/clients/Kausikh.png' },
 ];
 
 export default function ContactPage() {
