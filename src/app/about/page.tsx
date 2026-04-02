@@ -64,12 +64,12 @@ export default function AboutPage() {
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
                   With nearly four decades of experience, Surya Transport is a trusted name in automobile
                   parts transportation across South India. We specialise in sequence material transportation,
-                  ensuring seamless, time-critical deliveries for major automobile manufacturers. Our long-standing 
+                  ensuring seamless, time-critical deliveries for major automobile manufacturers. Our long-standing
                   client relationships are built on reliability, adaptability, and consistent service quality.
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300">
                   By integrating industry advancements, HMI safety standards, and operational best practices, we
-                  continue to deliver value while maintaining high performance, safety, and transparency, making us 
+                  continue to deliver value while maintaining high performance, safety, and transparency, making us
                   a dependable partner in factory-focused logistics.
                 </p>
               </div>
@@ -86,8 +86,8 @@ export default function AboutPage() {
               <h3 className="font-semibold text-gray-900 dark:text-white">Vision</h3>
             </div>
             <p className="text-sm text-gray-700 dark:text-gray-300">
-              Surya Transport aims to lead as the most cost-effective logistics service provider, leveraging 
-              technology and data-driven insights to reduce costs, prevent leakages, and deliver reliable, 
+              Surya Transport aims to lead as the most cost-effective logistics service provider, leveraging
+              technology and data-driven insights to reduce costs, prevent leakages, and deliver reliable,
               transparent, and efficient logistics solutions to every client.
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function AboutPage() {
               <h3 className="font-semibold text-gray-900 dark:text-white">Mission</h3>
             </div>
             <p className="text-sm text-gray-700 dark:text-gray-300">
-              Providing reliable, round-the-clock logistics solutions that ensure seamless factory operations 
+              Providing reliable, round-the-clock logistics solutions that ensure seamless factory operations
               and transparent costing.
             </p>
           </div>
@@ -119,18 +119,18 @@ export default function AboutPage() {
                 </h2>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
                   Surya Transport was founded in 1986 with a clear purpose: to build a transportation company
-                  defined by reliability, discipline, and trust. In the automobile industry, where timing and 
+                  defined by reliability, discipline, and trust. In the automobile industry, where timing and
                   precision are critical, we committed ourselves to delivering consistent and dependable service.
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                  Over the years, our growth has been driven by strong client partnerships, operational excellence, 
-                  and a dedicated team that upholds our standards every day. Our in-house workshop, experienced 
-                  workforce, and technology-enabled fleet management allow us to maintain efficiency while ensuring 
+                  Over the years, our growth has been driven by strong client partnerships, operational excellence,
+                  and a dedicated team that upholds our standards every day. Our in-house workshop, experienced
+                  workforce, and technology-enabled fleet management allow us to maintain efficiency while ensuring
                   safety and performance.
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
-                  We take pride in the journey so far, but our focus remains on continuous improvement and long-term 
-                  value creation for our clients. Trust, integrity, and accountability will always remain at the core 
+                  We take pride in the journey so far, but our focus remains on continuous improvement and long-term
+                  value creation for our clients. Trust, integrity, and accountability will always remain at the core
                   of Surya Transport.
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 italic mb-2">
@@ -158,6 +158,7 @@ export default function AboutPage() {
               {clients.map((client) => (
                 <div
                   key={client.name}
+                  title={client.name}
                   className="flex items-center justify-center rounded-lg bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 p-4 hover:shadow-md transition"
                 >
                   <Image

@@ -102,6 +102,7 @@ const CTABanner = () => {
             {clients.map((client, index) => (
               <div
                 key={index}
+                title={client.name}
                 className="
                   h-16 w-full flex items-center justify-center
                   bg-white dark:bg-gray-800
