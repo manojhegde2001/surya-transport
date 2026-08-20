@@ -1,23 +1,74 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const HeroBanner = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Explicitly set muted properties on the DOM element for browser autoplay compliance
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const playVideo = () => {
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch((err) => {
+          // Autoplay was blocked (e.g., low battery mode / power saving)
+          console.warn('Hero background video autoplay prevented:', err);
+        });
+      }
+    };
+
+    playVideo();
+
+    // Auto-resume playback if tab is switched back or gains focus
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && video.paused) {
+        playVideo();
+      }
+    };
+
+    // If browser initially restricted autoplay, trigger on first user interaction
+    const handleFirstInteraction = () => {
+      if (video.paused) {
+        playVideo();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true, passive: true });
+    window.addEventListener('click', handleFirstInteraction, { once: true, passive: true });
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('click', handleFirstInteraction);
+    };
+  }, []);
+
   return (
     <section className="relative h-[500px] sm:h-[550px] md:h-[580px] lg:h-[600px] xl:h-[620px] w-full overflow-hidden bg-gray-900 dark:bg-gray-950">
       {/* Local Video Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
           preload="auto"
-          className="w-full h-full object-cover opacity-100 dark:opacity-80"
-          poster="/truck-video-poster.jpg"
+          className="bg-video w-full h-full object-cover pointer-events-none select-none opacity-100 dark:opacity-80"
         >
-          {/* <source src="/truck-video.mp4" type="video/mp4" /> */}
           <source src="/logistics_hub.mp4" type="video/mp4" />
+          <source src="/truck-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
@@ -31,7 +82,7 @@ const HeroBanner = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 bg-white/10 dark:bg-white/5 backdrop-blur-sm border border-white/20 dark:border-white/10 rounded-full mb-3 lg:mb-4">
             <span className="w-2 h-2 bg-green-400 dark:bg-green-500 rounded-full animate-pulse" />
             <span className="text-white dark:text-gray-100 text-xs sm:text-sm font-medium">
-              38 Years of Delivering Discipline & Reliability
+              40 Years of Delivering Discipline & Reliability
             </span>
           </div>
 

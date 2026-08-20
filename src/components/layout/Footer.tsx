@@ -61,7 +61,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 text-sm">
               <span className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full" />
               <span className="text-green-600 dark:text-green-400 font-medium">
-                38+ Years of Experience
+                40+ Years of Experience
               </span>
             </div>
           </div>

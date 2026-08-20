@@ -10,7 +10,7 @@ import {
 const TrustCounters = () => {
   const counters = [
     {
-      value: '38+',
+      value: '40+',
       label: 'Years of Excellence',
       icon: HiOutlineBadgeCheck,
     },

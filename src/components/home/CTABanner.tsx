@@ -14,13 +14,14 @@ const CTABanner = () => {
     { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
     { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
     { name: 'Kausikh', logo: '/clients/Kausikh.png' },
-
+    { name: 'Pinstar Automotive', logo: '/clients/Pinstar.jpeg' },
+    { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.jpeg' },
   ];
 
   const stats = [
     { value: '200+', label: 'Trucks' },
     { value: '24+', label: 'Years with OEM clients' },
-    { value: '39+', label: 'Years of experience' },
+    { value: '40+', label: 'Years of experience' },
     { value: '2500+', label: 'Trips per day' },
   ];
 
@@ -30,7 +31,7 @@ const CTABanner = () => {
         {/* CTA CONTENT */}
         <div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Partner with 38 years of logistics excellence
+            Partner with 40 years of logistics excellence
           </h2>
 
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
@@ -98,7 +99,7 @@ const CTABanner = () => {
             Trusted by leading companies
           </p>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 items-center">
             {clients.map((client, index) => (
               <div
                 key={index}

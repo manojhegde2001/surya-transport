@@ -26,6 +26,8 @@ const clients = [
   { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
   { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
   { name: 'Kausikh', logo: '/clients/Kausikh.png' },
+  { name: 'Pinstar Automotive', logo: '/clients/Pinstar.jpeg' },
+  { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.jpeg' },
 ];
 
 
@@ -39,7 +41,7 @@ export default function AboutPage() {
             About Us
           </p>
           <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-            38 Years of Delivering Discipline, Reliability, and Transparency in Factory-Focused OEM Logistics
+            40 Years of Delivering Discipline, Reliability, and Transparency in Factory-Focused OEM Logistics
           </h1>
         </header>
 
