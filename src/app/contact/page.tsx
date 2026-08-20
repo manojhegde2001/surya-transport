@@ -21,8 +21,8 @@ const clients = [
   { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
   { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
   { name: 'Kausikh', logo: '/clients/Kausikh.png' },
-  { name: 'Pinstar Automotive', logo: '/clients/Pinstar.jpeg' },
-  { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.jpeg' },
+  { name: 'Pinstar Automotive', logo: '/clients/Pinstar.svg' },
+  { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.svg' },
 ];
 
 export default function ContactPage() {
@@ -166,20 +166,21 @@ export default function ContactPage() {
                 Trusted by Companies
               </h3>
 
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-3">
                 {clients.map((client) => (
                   <div
                     key={client.name}
+                    title={client.name}
                     className="flex items-center justify-center
-                    h-16 rounded-xl border border-slate-300
-                    bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 overflow-hidden"
+                    h-16 rounded-xl border border-slate-200
+                    bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 p-2 overflow-hidden transition-all hover:shadow-md"
                   >
                     <Image
                       src={client.logo}
                       alt={client.name}
                       width={110}
                       height={55}
-                      className="object-contain"
+                      className="max-h-11 max-w-full w-auto h-auto object-contain"
                     />
                   </div>
                 ))}

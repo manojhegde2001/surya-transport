@@ -14,8 +14,8 @@ const CTABanner = () => {
     { name: 'Seoyon E Hwa', logo: '/clients/Seoyon_E_Hwa.png' },
     { name: 'Popular Steel', logo: '/clients/popularsteel.jpeg' },
     { name: 'Kausikh', logo: '/clients/Kausikh.png' },
-    { name: 'Pinstar Automotive', logo: '/clients/Pinstar.jpeg' },
-    { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.jpeg' },
+    { name: 'Pinstar Automotive', logo: '/clients/Pinstar.svg' },
+    { name: 'United Industries Plastic Pvt Ltd', logo: '/clients/United_Industries.svg' },
   ];
 
   const stats = [
